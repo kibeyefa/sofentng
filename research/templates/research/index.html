@@ -1,0 +1,217 @@
+{% extends 'base.html' %}
+{% load static %}
+
+
+{% block 'extra_css' %}
+<style>
+  #research-hero {
+    width: 100%;
+    height: 100vh;
+    background: url('/static/assets/img/research/research-hero.jpg') top center;
+    background-size: cover;
+    background-position: center;
+    position: relative;
+  }
+
+  #research-hero:before {
+    content: '';
+    background: rgba(0, 0, 0, 0.6);
+    position: absolute;
+    bottom: 0;
+    top: 0;
+    left: 0;
+    right: 0;
+  }
+
+  #research-hero .research-hero-container {
+    position: absolute;
+    bottom: 0;
+    top: 0;
+    left: 0;
+    right: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    text-align: center;
+    padding: 0 15px;
+  }
+
+  #research-hero h3 {
+    background: rgba(255, 255, 255, 0.1);
+    color: #fff;
+    font-size: 26px;
+    padding: 10px 30px;
+    margin-bottom: 30px;
+    border-radius: 50px;
+  }
+
+  #research-hero h1 {
+    margin: 0 0 10px 0;
+    font-size: 48px;
+    font-weight: 700;
+    line-height: 56px;
+    text-transform: uppercase;
+    color: #fff;
+  }
+
+  #research-hero h2 {
+    color: #eee;
+    margin-bottom: 40px;
+    font-size: 24px;
+  }
+
+  #research-hero .btn-get-started {
+    font-family: 'Poppins', sans-serif;
+    text-transform: uppercase;
+    font-weight: 400;
+    font-size: 13px;
+    letter-spacing: 1px;
+    display: inline-block;
+    padding: 8px 30px 9px 30px;
+    border-radius: 50px;
+    transition: 0.5s;
+    border: 2px solid #fff;
+    color: #fff;
+  }
+
+  #research-hero .btn-get-started:hover {
+    background: #92278f;
+    border: 2px solid #92278f;
+  }
+
+  @media (min-width: 1024px) {
+    #research-hero {
+      background-attachment: fixed;
+    }
+  }
+
+  @media (max-width: 768px) {
+    #research-hero h3 {
+      font-size: 22px;
+    }
+
+    #research-hero h1 {
+      font-size: 28px;
+      line-height: 36px;
+    }
+
+    #research-hero h2 {
+      font-size: 18px;
+      line-height: 24px;
+      margin-bottom: 30px;
+    }
+  }
+
+  @media (max-height: 500px) {
+    #research-hero {
+      height: 150vh;
+    }
+  }
+
+  .form-control {
+    border-radius: 0 !important;
+  }
+
+  .form-control:focus {
+    border: 1px solid var(--color-ceal);
+  }
+</style>
+{% endblock %}
+
+{% block 'main' %}
+<main id="main">
+  <div class="pt-5 mt-5" style="background-color: #f6f4f4;">
+    <div class="container">
+      <div class="d-flex justify-content-between align-items-center">
+        <h3>Research</h3>
+
+        <nav aria-label="breadcrumb">
+          <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="/">Home</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Research</li>
+          </ol>
+        </nav>
+      </div>
+    </div>
+  </div>
+
+  <section id="research">
+    <div class="container-lg" id="fiter-form-section">
+      <div class="row flex-row-reverse">
+        <div class="col-lg-5 mb-2">
+          <form action="" method="post">
+            {% csrf_token %}
+            <div class="input-group">
+              <input type="Search" name="q" class="form-control" placeholder="Search..."></input>
+              <button class="btn input-group-text btn-ceal bi bi-search"> Search</button>
+            </div>
+
+            <div id="filter-form" class="input-group d-none my-2">
+              <div class="form-group">
+                <label for="" class="small-caps">start date</label>
+                <input type="date" class="form-control" placeholder="Start date">
+              </div>
+              <div class="form-group">
+                <label for="" class="small-caps">end date</label>
+                <input type="date" class="form-control" placeholder="Start date">
+              </div>
+            </div>
+          </form>
+        </div>
+
+        <div class="col-lg-7">
+          {% for item in obj_list %}
+          <div class="card shadow-sm mb-2" style="max-height: 200px;">
+            <div class="card-body py-1">
+              <div class="d-flex align-items-center">
+                <div><i class="bi bi-file-earmark-pdf fs-1"></i></div>
+                <div class="flex-fill mt-2 mx-1">
+                  <h6 class="mb-0"><a href="{{item.get_absolute_url}}" target="_blank">{{item.name}}</a></h6>
+                  <span style="font-size: 14px;">Author name</span>
+                  <i class="bi bi-dot"></i>
+                  <span style="font-size: 14px;">{{item.created_on}}</span>
+                  <i class="bi bi-dot"></i>
+                  <span style="font-size: 14px;">{{item.filesize}}</span>
+                </div>
+                <div>
+                  <a href="{{item.get_absolute_url}}" class="bi bi-download fs-5 mt-lg-2" download=""></a>
+                </div>
+              </div>
+            </div>
+          </div>
+          {% empty %}
+          <h3>No documents available</h3>
+          {% endfor %}
+
+
+          {% if obj_list %}
+          <div class="text-center">
+            <div class="btn-group btn-group-sm">
+              {% if obj_list.has_previous %}
+              <a href="?page=1" class="btn btn btn-outline-dark bi bi-chevron-double-left"></a>
+              <a href="?page={{obj_list.previous_page_number}}" class="btn btn btn-outline-dark bi bi-chevron-left"></a>
+              {% endif %}
+              <button class="btn btn-dark">{{obj_list.number}}</button>
+              {% if obj_list.has_next %}
+              <a href="?page={{obj_list.next_page_number}}" class="btn btn-outline-dark bi bi-chevron-right"></a>
+              <a href="?page={{obj_list.paginator.num_pages}}"
+                class="btn btn-outline-dark bi bi-chevron-double-right"></a>
+              {% endif %}
+            </div>
+          </div>
+          {% endif %}
+
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+{% endblock %}
+
+{% block 'extra_js' %}
+<script src="/static/assets/jquery.min.js"></script>
+<script>
+  document.getElementById('header').style.background = 'rgba(0,0,0,0.9)'
+</script>
+{% endblock %}

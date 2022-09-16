@@ -1,0 +1,73 @@
+{% extends 'base.html' %}
+
+{% block 'extra_css' %}
+<style>
+  #farms-hero {
+    display: none;
+  }
+
+  #header {
+    background-color: rgba(0, 0, 0, .9);
+  }
+</style>
+{% endblock %}
+
+
+{% block 'main' %}
+<main id="main ">
+  <div class="d-flex align-items-center justify-content-center mt-5 pt-5">
+    <form id="paymentForm">
+      <div class="form-group">
+        <label for="email">Email Address</label>
+        <input type="email" id="email-address" required />
+      </div>
+      <div class="form-group">
+        <label for="amount">Amount</label>
+        <input type="tel" id="amoun" required />
+      </div>
+      <div class="form-group">
+        <label for="first-name">First Name</label>
+        <input type="text" id="first-name" />
+      </div>
+      <div class="form-group">
+        <label for="last-name">Last Name</label>
+        <input type="text" id="last-name" />
+      </div>
+      <div class="form-submit">
+        <button type="button" onclick="payWithPaystack()"> Pay </button>
+        <button type="submit" onclick=""> Pay </button>
+      </div>
+      <input type="number" name="" id="amount" disabled class="" value="{{order.price}}">
+    </form>
+  </div>
+
+</main>
+{% endblock %}
+
+{% block 'extra_js' %}
+<script src="https://js.paystack.co/v1/inline.js"></script>
+<script>
+  var paym = document.getElementById('paymentForm');
+  paymentForm.addEventListener('submit', payWithPaystack, false);
+  function payWithPaystack() {
+    var handler = PaystackPop.setup({
+      key: 'pk_test_ea591b2b61ee08638efa6bc5d666413f704f9cb2', // Replace with your public key
+      email: '{{order.email}}',
+      amount: document.getElementById('amount').value * 100, // the amount value is multiplied by 100 to convert to the lowest currency unit
+      currency: 'NGN', // Use GHS for Ghana Cedis or USD for US Dollars
+      ref: '{{order.id}}', // Replace with a reference you generated
+      callback: function (response) {
+        //this happens after the payment is completed successfully
+        var reference = response.reference;
+        alert('Payment complete! Reference: ' + reference);
+        window.location = 'http://127.0.0.1:8000/farms/{{order.id}}/confirm/'
+        // Make an AJAX call to your server with the reference to verify the transaction
+      },
+      onClose: function () {
+        alert('Transaction was not completed, window closed.');
+      },
+    });
+    handler.openIframe();
+  }
+</script>
+{% endblock %}

@@ -1,0 +1,16 @@
+{% block subject %} Purchase of {{sale.item.title}} with reference {{sale.id}}{% endblock %}
+
+{% block plain %}
+Notice of purchase for {{sale.item.title}}.
+
+Hi {{receiver.first_name}}, your payment for {{sale.item.title}} has been received, contact buyer to ensure delivery. Don't forget to mark the transaction as completed so the seller gets their money.
+Remember we have a 48 hour refund policy.
+
+For any question, complaint or in case of a refund, send a mail to us at contact@sofentng.org or admin@sofentng.org.
+
+Visit {{response_url}} to view.
+
+
+If you have any issue reach us at contact@sofentng.org or admin@sofentng.org.
+
+{% endblock %}

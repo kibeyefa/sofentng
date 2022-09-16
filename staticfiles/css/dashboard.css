@@ -1,0 +1,28 @@
+.card-header,
+.card,
+.card-body,
+.card-footer {
+  background-color: white !important;
+}
+
+p {
+  margin-bottom: 2px !important;
+}
+
+.fs-14 {
+  font-size: 14px;
+}
+
+.dashboard-menu {
+  display: flex;
+  flex-direction: column;
+}
+
+.dashboard-menu a {
+  color: black;
+}
+
+.dashboard-menu a .active {
+  background-color: var(--color-ceal);
+  color: white;
+}

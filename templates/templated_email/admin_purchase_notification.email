@@ -1,0 +1,14 @@
+{% block subject %} Purchase of {{sale.item.title}} with reference {{sale.id}}{% endblock %}
+
+{% block plain %}
+Notice of purchase for {{sale.item.title}}.
+
+Payment for said item has been received, a total of {{sale.price}} naira. Mails have been sent to both parties.
+
+Vist {{response_url}} to view.
+
+
+
+If you have any issue reach us at contact@sofentng.org or admin@sofentng.org.
+
+{% endblock %}

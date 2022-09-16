@@ -1,0 +1,14 @@
+{% block subject %} Purchase of {{sale.item.title}} with reference {{sale.id}}{% endblock %}
+
+{% block plain %}
+Notice of purchase for {{sale.item.title}}.
+
+Hi {{receiver.first_name}}, payment for sale with reference {{sale.id}} has been made by {{sender.username}} for {{sale.item.title}} at ₦{{sale.price}}.
+For any question or complaint, send a mail to us at contact@sofentng.org or admin@sofentng.org.
+
+Visit {{response_url}} to view.
+
+
+If you have any issue reach us at contact@sofentng.org or admin@sofentng.org.
+
+{% endblock %}

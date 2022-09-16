@@ -1,0 +1,12 @@
+{% block subject %} You have a new message from {{receiver.username}}{% endblock %}
+
+{% block plain %}
+Hi {{receiver.first_name}}, You have a new message from {{sender.username}}.
+
+{{message}}
+
+Visit {{response_url}} to respond.
+
+If you have any issue reach us at contact@sofentng.org or admin@sofentng.org.
+
+{% endblock %}

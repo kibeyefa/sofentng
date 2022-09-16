@@ -1,0 +1,10 @@
+{% block subject %} {{subject}} from {{name}}{% endblock %}
+
+{% block plain %}
+Hi Admin,
+
+{{message}}
+
+visit {{url}}
+
+{% endblock %}

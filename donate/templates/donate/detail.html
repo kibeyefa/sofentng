@@ -1,0 +1,211 @@
+{% extends 'base.html' %}
+{% load static %}
+
+
+{% block 'extra_css' %}
+<!-- <link rel="stylesheet" href="https://unpkg.com/swiper@8/swiper-bundle.min.css" /> -->
+<link rel="stylesheet" href="/static/assets/vendor/owlcarousel/assets/owl.carousel.min.css">
+<link rel="stylesheet" href="/static/assets/vendor/owlcarousel/assets/owl.theme.default.css">
+
+{% endblock %}
+
+{% block 'main' %}
+<main id="main">
+  <div class="pt-5" style="background-color: #f6f4f4;">
+    <div class="container mt-5">
+      <div class="d-flex justify-content-between align-items-center">
+        <h3>Donate</h3>
+
+        <nav aria-label="breadcrumb">
+          <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="/">Home</a></li>
+            <li class="breadcrumb-item"><a href="/donate/">Donate</a></li>
+            <li class="breadcrumb-item active" aria-current="page">{{ item.title }}</li>
+          </ol>
+        </nav>
+      </div>
+    </div>
+  </div>
+
+  <section id="detail">
+    <div class="container-lg">
+      <h4></h4>
+
+      <div class="row gx-lg-5">
+        <div class="col-12 col-sm-6">
+          <!-- Slider main container -->
+          <div class="swiper swiper-1 h-100">
+            <!-- Additional required wrapper -->
+            <div class="swiper-wrapper h-100">
+              <!-- Slides -->
+              {% for image_url in item.image_set_urls %}
+              <div class="swiper-slide h-100">
+                <div class="card border-1 h-100">
+                  <img src="{{image_url}}" alt="" class="w-100 h-100">
+                  <!-- <div class="card-body">
+                      <h6 class="card-title text-black text-truncate">Product name</h6>
+                      <p class=" card-subtitle">$20</p>
+                    </div> -->
+                </div>
+              </div>
+              {% endfor %}
+            </div>
+            <!-- If we need pagination -->
+            <div class="swiper-pagination"></div>
+
+            <!-- If we need navigation buttons -->
+            <div class="swiper-button-prev swiper-controls text-black-50"></div>
+            <div class="swiper-button-next swiper-controls text-black-50"></div>
+
+            <!-- If we need scrollbar -->
+            <!-- <div class="swiper-scrollbar"></div> -->
+          </div>
+        </div>
+
+        <div class="col-12 col-sm-6 pt-3">
+          <div class="d-flex align-items-end mb-2 px-1 px-lg-0">
+            <h4>{{ item.title}}</h4>
+            <span href="" class="ms-auto bi-heart fs-4"></span>
+          </div>
+
+          {% if user.is_authenticated %}
+          <p class="card-tex small fw-bold">
+            Donated by {{item.donator.username}}, reach out via {{item.donator.phone}}
+          </p>
+          {% else  %}
+          <p class="card-tex small fw-bold">
+            <a href="/accounts/login/?next=/donate/detail/{{item.id}}/">Login</a> to access this item.
+          </p>
+          {% endif %}
+          <!-- <h5 class="fw-bolder">{{ item.user.email }}</h5> -->
+          <p class="mt-4">
+            {{item.description}}
+          </p>
+
+          <!-- <form action="" class="d-flex">
+            <div><button type="submit" class="btn btn-ceal">Add to cart</button></div>
+            <div class="input-group mb-3 ms-1" style="max-width: 130px">
+              <button class="input-group-text btn btn-secondary" data-amount="-1" type="button"
+                id="basic-addon1">-1</button>
+              <input type="text" class="form-control text-center" value="1" aria-label="Username"
+                aria-describedby="basic-addon1">
+              <button class="input-group-text btn btn-secondary" data-amount="+1" type="button">+1</button>
+            </div>
+          </form> -->
+
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="similar">
+    <div class="container-lg">
+      <h5 class="fw-bold">Store products</h5>
+
+      <!-- Slider main container -->
+      <div class="swiper swiper-2">
+        <!-- Additional required wrapper -->
+        <div class="swiper-wrapper">
+          <!-- Slides -->
+          {% for item in list %}
+          <div class="swiper-slide">
+            <div class="card border-1">
+              <a href="/store/detail/{{item.slug}}/">
+                <img src="{{item.get_first_image_url}}" alt="" class=" card-img-top" height="150px">
+                <div class="card-body">
+                  <h6 class="card-title text-black text-truncate">{{item.title}}</h6>
+                  <p class=" card-subtitle">{% include 'naira.html' %}{{item.price}}</p>
+                </div>
+              </a>
+            </div>
+          </div>
+          {% endfor %}
+
+
+        </div>
+        <!-- If we need pagination -->
+        <div class="swiper-pagination"></div>
+
+        <!-- If we need navigation buttons -->
+        <div class="swiper-button-prev swiper-controls text-black-50"></div>
+        <div class="swiper-button-next swiper-controls text-black-50"></div>
+
+        <!-- If we need scrollbar -->
+        <!-- <div class="swiper-scrollbar"></div> -->
+      </div>
+    </div>
+
+  </section>
+</main>
+{% endblock %}
+
+{% block 'extra_js' %}
+<!-- <script src="https://unpkg.com/swiper@8/swiper-bundle.min.js"></script> -->
+<script src="/static/assets/jquery.min.js"></script>
+<script>
+  document.getElementById('header').style.background = 'rgba(0,0,0, 0.9)';
+
+  const swiper = new Swiper('.swiper-1', {
+    // Default parameters
+    slidesPerView: 1,
+    spaceBetween: 10,
+    // Responsive breakpoints
+
+  })
+
+  const swiper_2 = new Swiper('.swiper-2', {
+    // Default parameters
+    slidesPerView: 2,
+    spaceBetween: 10,
+    loop: false,
+    // Responsive breakpoints
+    breakpoints: {
+      // when window width is >= 320px
+      320: {
+        slidesPerView: 2,
+        spaceBetween: 20
+      },
+      // when window width is >= 480px
+      480: {
+        slidesPerView: 3,
+        spaceBetween: 30
+      },
+      // when window width is >= 640px
+      640: {
+        slidesPerView: 4,
+        spaceBetween: 40
+      }
+    }
+
+  })
+
+
+
+  $('.swiper-1 .swiper-button-next').click(() => {
+    swiper.slideNext()
+    console.log('Hello world')
+  })
+
+  $('.swiper-1 .swiper-button-prev').click(() => {
+    swiper.slidePrev()
+  })
+
+  $('.swiper-2 .swiper-button-next').click(() => {
+    swiper_2.slideNext()
+  })
+
+  $('.swiper-2 .swiper-button-prev').click(() => {
+    swiper_2.slidePrev()
+  })
+
+  $('.btn-secondary').each((index, elem) => {
+    $(elem).click(() => {
+      const input = $('.form-control')[0]
+      if (elem.getAttribute('data-amount') == '-1' && input.value <= 0) {
+        return
+      }
+      input.value = eval(input.value + elem.getAttribute('data-amount'))
+    })
+  })
+</script>
+{% endblock %}

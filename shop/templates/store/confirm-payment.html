@@ -1,0 +1,183 @@
+{% extends 'base.html' %}
+
+
+{% block 'extra_css' %}
+<link rel="stylesheet" href="/static/assets/css/form-validation.css">
+<style>
+  :root {
+    --bs-primary: #92278f !important;
+  }
+
+  .form-check-input:checked {
+    background-color: #92278f;
+    border-color: #92278f;
+  }
+
+  .bg-ceal {
+    background-color: var(--color-ceal);
+  }
+
+  .text-ceal {
+    color: var(--color-ceal);
+  }
+
+  .bd-placeholder-img {
+    font-size: 1.125rem;
+    text-anchor: middle;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    user-select: none;
+  }
+
+  @media (min-width: 768px) {
+    .bd-placeholder-img-lg {
+      font-size: 3.5rem;
+    }
+  }
+
+  .form-control {
+    border-radius: 0 !important;
+  }
+
+  .form-control:focus {
+    border: 1px solid var(--color-ceal);
+  }
+</style>
+{% endblock %}
+
+
+{% block 'main' %}
+<div class="container pt-5 pb-3 mb-3">
+  <main>
+    <div class="py-5 text-center">
+      <!-- <img class="d-block mx-auto mb-4" src="../assets/brand/bootstrap-logo.svg" alt="" width="72" height="57">
+      <h2>Checkout form</h2>
+      <p class="lead">Below is an example form built entirely with Bootstrap’s form controls. Each required form group
+        has a validation state that can be triggered by attempting to submit the form without completing it.</p> -->
+    </div>
+
+    <div class="row g-5">
+      <div class="col-md-5 col-lg-4 order-md-last">
+        <h4 class="d-flex justify-content-between align-items-center mb-3">
+          <span class="text-ceal">Your cart</span>
+          <span class="badge bg-ceal rounded-pill">{{cart.items.count}}</span>
+        </h4>
+        <ul class="list-group mb-3 rounded-0">
+          {% for order_item in cart.items.all %}
+          <li class="list-group-item d-flex justify-content-between lh-sm">
+            <div>
+              <h6 class="my-0">{{ order_item.item.title }}</h6>
+              <small class="text-muted">Qunatity: {{ order_item.quantity }}</small>
+            </div>
+            <span class="text-muted">&#8358;{{ order_item.total_price }}</span>
+          </li>
+          {% endfor %}
+
+          <!-- <li class="list-group-item d-flex justify-content-between bg-light">
+            <div class="text-success">
+              <h6 class="my-0">Promo code</h6>
+              <small>EXAMPLECODE</small>
+            </div>
+            <span class="text-success">−$5</span>
+          </li> -->
+          <li class="list-group-item d-flex justify-content-between">
+            <span>Total (NGN)</span>
+            <strong>&#8358;{{ cart.total_price }}</strong>
+          </li>
+        </ul>
+
+        <!-- <form class="card p-2">
+          <div class="input-group">
+            <input type="text" class="form-control" placeholder="Promo code">
+            <button type="submit" class="btn btn-secondary">Redeem</button>
+          </div>
+        </form> -->
+      </div>
+      <div class="col-md-7 col-lg-8">
+        <div class="card">
+          <div class="card-header">
+            <h4 class="card-title mb-0">Order summary</h4>
+          </div>
+          <div class="card-body">
+            <ul class="list-unstyled">
+              <li class="fw-bold">Order #{{cart.id}}</li>
+              <li class="my-2"><span class="fw-bold">No of items:</span> {{cart.total_items}}</li>
+              <li>
+                <span class="fw-bold">Payment method: </span>
+
+                {% if cart.billingaddress.payment_method == 'd' %}
+                Pay on delivery
+                {% else  %}
+                Pay with card
+                {% endif %}
+              </li>
+              <li class="my-2"><span class="fw-bold">Total Payment: </span>&#8358;{{cart.total_price}}</li>
+            </ul>
+          </div>
+          <div class="card-footer bg-white">
+            <form action="" method="post" id="form">
+              {% csrf_token %}
+              <div class="row">
+                <div class="col-sm-8">
+                  {% if cart.billingaddress.payment_method == 'd' %}
+                  <button type="submit" name="confirm" value="confirm" class="btn btn-ceal rounded-1 w-100">Confirm
+                    Payment
+                  </button>
+                  {% else  %}
+                  <button type="button" onclick="payWithPaystack()" class="btn btn-ceal rounded-1 w-100">Confirm
+                    Payment
+                  </button>
+                  <button id="submit" type="submit" name="confirm" value="confirm"
+                    class="btn btn-ceal rounded-1 w-100 d-none">Confirm
+                    Payment
+                  </button>
+                  {% endif %}
+                </div>
+                <div class="col-sm-4">
+                  <button type="submit" name="cancel" value="cancel" class="btn btn-danger w-100">Cancel</button>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+</div>
+{% endblock %}
+
+
+
+{% block 'extra_js' %}
+<script src="/static/assets/js/form-validation.js"></script>
+<script src="https://js.paystack.co/v1/inline.js"></script>
+<script>
+  let refID = '{{cart.id}}'
+
+  function payWithPaystack() {
+    var handler = PaystackPop.setup({
+      key: 'pk_test_ea591b2b61ee08638efa6bc5d666413f704f9cb2', // Replace with your public key
+      email: '{{cart.billingaddress.email}}',
+      amount: parseInt("{{cart.total_price}}") * 100, // the amount value is multiplied by 100 to convert to the lowest currency unit
+      currency: 'NGN', // Use GHS for Ghana Cedis or USD for US Dollars
+      ref: refID, // Replace with a reference you generated
+      callback: function (response) {
+        //this happens after the payment is completed successfully
+        var reference = response.reference;
+        console.log(reference)
+        //alert('Payment complete! Reference: ' + reference);
+        $('#submit').click();
+        // Make an AJAX call to your server with the reference to verify the transaction
+      },
+      onClose: function () {
+        alert('Transaction was not completed, window closed.');
+      },
+    });
+    handler.openIframe();
+  }
+
+</script>
+{% endblock %}
+
+
+</body>

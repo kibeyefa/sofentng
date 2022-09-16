@@ -1,0 +1,583 @@
+{% if home  %}
+<header id="header" class="fixed-top">
+  <div class="container-lg d-flex align-items-center justify-content-between">
+    <h1 class="logo"><a href="/">Sofent</a></h1>
+    <!-- Uncomment below if you prefer to use an image logo -->
+    <!-- <a href="index.html" class="logo"><img src="static/assets/img/logo.png" alt="" class="img-fluid"></a>-->
+    <nav id="navbar" class="navbar">
+      <ul>
+        <li><a class="nav-link scrollto active" href="/">Home</a></li>
+        <li><a class="nav-link scrollto" href="/about/">About</a></li>
+        <li><a class="nav-link" href="/farms/">Farms</a></li>
+        <li><a href="/store/">E-commerce</a></li>
+        <li><a href="/donate/">Charity</a></li>
+        <li><a href="/research/">Research</a></li>
+        {% if user.is_authenticated %}
+        <li class="dropdown d-lg-none"><a href="#"><span>Account</span> <i class="bi bi-chevron-down"></i></a>
+          <ul>
+            <li>
+              <a href="/accounts/profile/" class="justify-content-start me-1">
+                <span class="ms-0">Dashboard</span>
+              </a>
+            </li>
+            <li>
+              <a href="/accounts/logout/" class="justify-content-start me-1">
+                Logout
+              </a>
+            </li>
+            {% if user.is_admin %}
+            <li>
+              <a href="/admin/" class="justify-content-start me-1">
+                Admin
+              </a>
+            </li>
+            {% endif %}
+          </ul>
+        </li>
+        {% else %}
+        <li><a href="/accounts/login/" class="d-lg-none">Login</a></li>
+        {% endif %}
+      </ul>
+      <i class="bi bi-list mobile-nav-toggle"></i>
+    </nav>
+
+    {% if user.is_authenticated %}
+    <nav id="" class="navbar align-items-center d-none d-lg-block">
+      <ul>
+        <li class="dropdown">
+          <a class="cursor-pointer  d-flex align-items-center">
+            <span>Account</span>
+            <i class="bi bi-chevron-down"></i>
+          </a>
+          <ul>
+            <li>
+              <a href="/accounts/profile/" class="justify-content-start me-1">
+                <span class="ms-0">Dashboard</span>
+              </a>
+            </li>
+            <li>
+              <a href="/accounts/logout/" class="justify-content-start me-1">
+                Logout
+              </a>
+            </li>
+            {% if request.user.is_admin %}
+            <li>
+              <a href="/admin/" class="justify-content-start me-1">
+                Admin
+              </a>
+            </li>
+            {% endif %}
+          </ul>
+        </li>
+      </ul>
+    </nav>
+    {% else  %}
+    <a href="/accounts/login" class="btn btn-ceal d-none d-lg-inline-block px-4 fw-bolder">Login</a>
+    {% endif %}
+    <!-- .navbar -->
+  </div>
+</header>
+{% elif about %}
+<header id="header" class="fixed-top">
+  <div class="container-lg d-flex align-items-center justify-content-between">
+    <h1 class="logo"><a href="/">Sofent</a></h1>
+    <!-- Uncomment below if you prefer to use an image logo -->
+    <!-- <a href="index.html" class="logo"><img src="static/assets/img/logo.png" alt="" class="img-fluid"></a>-->
+    <nav id="navbar" class="navbar">
+      <ul>
+        <li><a class="nav-link scrollto" href="/">Home</a></li>
+        <li><a class="nav-link scrollto active" href="/about/">About</a></li>
+        <li><a class="nav-link" href="/farms/">Farms</a></li>
+        <li><a href="/store/">E-commerce</a></li>
+        <li><a href="/donate/">Charity</a></li>
+        <li><a href="/research/">Research</a></li>
+        {% if user.is_authenticated %}
+        <li class="dropdown d-lg-none"><a href="#"><span>Account</span> <i class="bi bi-chevron-down"></i></a>
+          <ul>
+            <li>
+              <a href="/accounts/profile/" class="justify-content-start me-1">
+                <span class="ms-0">Dashboard</span>
+              </a>
+            </li>
+            <li>
+              <a href="/accounts/logout/" class="justify-content-start me-1">
+                Logout
+              </a>
+            </li>
+            {% if user.is_admin %}
+            <li>
+              <a href="/admin/" class="justify-content-start me-1">
+                Admin
+              </a>
+            </li>
+            {% endif %}
+          </ul>
+        </li>
+        {% else %}
+        <li><a href="/accounts/login/">Login</a></li>
+        {% endif %}
+      </ul>
+      <i class="bi bi-list mobile-nav-toggle"></i>
+    </nav>
+
+    {% if user.is_authenticated %}
+    <nav id="" class="navbar align-items-center d-none d-lg-block">
+      <ul>
+        <li class="dropdown">
+          <a class="cursor-pointer  d-flex align-items-center">
+            <span>Account</span>
+            <i class="bi bi-chevron-down"></i>
+          </a>
+          <ul>
+            <li>
+              <a href="/accounts/profile/" class="justify-content-start me-1">
+                <span class="ms-0">Dashboard</span>
+              </a>
+            </li>
+            <li>
+              <a href="/accounts/logout/" class="justify-content-start me-1">
+                Logout
+              </a>
+            </li>
+            {% if request.user.is_admin %}
+            <li>
+              <a href="/admin/" class="justify-content-start me-1">
+                Admin
+              </a>
+            </li>
+            {% endif %}
+          </ul>
+        </li>
+      </ul>
+    </nav>
+    {% else  %}
+    <a href=" /accounts/login" class="btn btn-ceal d-none d-lg-inline-block px-4 fw-bolder">Login</a>
+    {% endif %}
+    <!-- .navbar -->
+  </div>
+</header>
+{% elif store %}
+<header id="header" class="fixed-top" style="background-color: rgba(0, 0, 0, 0.9);">
+  <div class="container-lg d-flex align-items-center justify-content-between">
+    <h1 class="logo"><a href="/">Sofent</a></h1>
+    <!-- Uncomment below if you prefer to use an image logo -->
+    <!-- <a href="index.html" class="logo"><img src="static/assets/img/logo.png" alt="" class="img-fluid"></a>-->
+    <nav id="navbar" class="navbar">
+      <ul>
+        <li><a class="nav-link scrollto" href="/">Home</a></li>
+        <li><a class="nav-link scrollto" href="/about/">About</a></li>
+        <li class="dropdown cursor-pointer">
+          <a class="nav-link">
+            <span>Services</span>
+            <i class="bi bi-chevron-down"></i>
+          </a>
+          <ul>
+            <li><a href="/store/">E-commerce</a></li>
+            <li><a href="/farms/">Farms</a></li>
+            <li><a href="/research/">Research</a></li>
+            <li><a href="/donate">Charity</a></li>
+          </ul>
+        </li>
+        <li class="dropdown nav-link cursor-pointer">
+          <a class="nav-link">
+            <span>Categories</span>
+            <i class="bi bi-chevron-down"></i>
+          </a>
+          <ul>
+            {% for category in categories %}
+            <li><a href="/store/categories/{{category.slug}}/">{{category.title}}</a></li>
+            {% endfor %}
+          </ul>
+        </li>
+        {% if user.is_authenticated %}
+        <li class="dropdown d-lg-none"><a href="#"><span>Account</span> <i class="bi bi-chevron-down"></i></a>
+          <ul>
+            <li>
+              <a href="/accounts/profile/" class="justify-content-start me-1">
+                <span class="ms-0">Dashboard</span>
+              </a>
+            </li>
+            <li>
+              <a href="/accounts/logout/" class="justify-content-start me-1">
+                Logout
+              </a>
+            </li>
+            {% if request.user.is_admin %}
+            <li>
+              <a href="/admin/" class="justify-content-start me-1">
+                Admin
+              </a>
+            </li>
+            {% endif %}
+          </ul>
+        </li>
+        {% else %}
+        <li><a href="/accounts/login/">Login</a></li>
+        {% endif %}
+      </ul>
+      <i class="bi bi-list mobile-nav-toggle"></i>
+      <!-- <a href="/store/cart/" data-count="{% if cart %} {{cart.items.count}} {% else %} 0 {% endif %}"
+        class="nav-link cart d-lg-none">
+        <i class="bi bi-cart3 text-white fs-4"></i>
+      </a> -->
+    </nav>
+
+    {% if user.is_authenticated %}
+    <nav id="" class="navbar align-items-center d-none d-lg-block">
+      <ul>
+        <li class="dropdown cursor-pointer">
+          <a href="#">
+            <span>Account</span>
+            <i class="bi bi-chevron-down"></i>
+          </a>
+          <ul>
+            <li>
+              <a href="/accounts/profile/" class="justify-content-start me-1">
+                <span class="ms-0">Dashboard</span>
+              </a>
+            </li>
+            <li>
+              <a href="/accounts/logout/" class="justify-content-start me-1">
+                Logout
+              </a>
+            </li>
+            {% if request.user.is_admin %}
+            <li>
+              <a href="/admin/" class="justify-content-start me-1">
+                Admin
+              </a>
+            </li>
+            {% endif %}
+          </ul>
+        </li>
+        <!-- <li>
+          <a href="/store/cart" data-count="{{ cart.items.count }}" class="nav-link cart d-none d-lg-block">
+            <i class="bi bi-cart3 text-white fs-4"></i>
+          </a>
+        </li> -->
+
+      </ul>
+
+    </nav>
+    {% else  %}
+    <a href="/accounts/login" class="btn btn-ceal d-none d-lg-inline-block px-4 fw-bolder">Login</a>
+    {% endif %}
+    <!-- .navbar -->
+  </div>
+</header>
+{% elif farms %}
+<header id="header" class="fixed-top">
+  <div class="container-lg d-flex align-items-center justify-content-between">
+    <h1 class="logo"><a href="/">Sofent</a></h1>
+    <!-- Uncomment below if you prefer to use an image logo -->
+    <!-- <a href="index.html" class="logo"><img src="static/assets/img/logo.png" alt="" class="img-fluid"></a>-->
+    <nav id="navbar" class="navbar">
+      <ul>
+        <li><a class="nav-link scrollto" href="/">Home</a></li>
+        <li><a class="nav-link scrollto" href="/about/">About</a></li>
+        <li><a class="nav-link active" href="/farms/">Farms</a></li>
+        <li><a href="/store/">E-commerce</a></li>
+        <li><a href="/donate/">Charity</a></li>
+        <li><a href="/research/">Research</a></li>
+        {% if user.is_authenticated %}
+        <li class="dropdown d-lg-none"><a href="#"><span>Account</span> <i class="bi bi-chevron-down"></i></a>
+          <ul>
+            <li>
+              <a href="/accounts/profile/" class="justify-content-start me-1">
+                <span class="ms-0">Dashboard</span>
+              </a>
+            </li>
+            <li>
+              <a href="/accounts/logout/" class="justify-content-start me-1">
+                Logout
+              </a>
+            </li>
+            {% if user.is_admin %}
+            <li>
+              <a href="/admin/" class="justify-content-start me-1">
+                Admin
+              </a>
+            </li>
+            {% endif %}
+          </ul>
+        </li>
+        {% else %}
+        <li><a href="/accounts/login/">Login</a></li>
+        {% endif %}
+      </ul>
+      <i class="bi bi-list mobile-nav-toggle"></i>
+    </nav>
+
+    {% if user.is_authenticated %}
+    <nav id="" class="navbar align-items-center d-none d-lg-block">
+      <ul>
+        <li class="dropdown">
+          <a class="cursor-pointer  d-flex align-items-center">
+            <span>Account</span>
+            <i class="bi bi-chevron-down"></i>
+          </a>
+          <ul>
+            <li>
+              <a href="/accounts/profile/" class="justify-content-start me-1">
+                <span class="ms-0">Dashboard</span>
+              </a>
+            </li>
+            <li>
+              <a href="/accounts/logout/" class="justify-content-start me-1">
+                Logout
+              </a>
+            </li>
+            {% if request.user.is_admin %}
+            <li>
+              <a href="/admin/" class="justify-content-start me-1">
+                Admin
+              </a>
+            </li>
+            {% endif %}
+          </ul>
+        </li>
+      </ul>
+    </nav>
+    {% else  %}
+    <a href="/accounts/login" class="btn btn-ceal d-none d-lg-inline-block px-4 fw-bolder">Login</a>
+    {% endif %}
+    <!-- .navbar -->
+  </div>
+</header>
+{% elif  donate %}
+<header id="header" class="fixed-top">
+  <div class="container-lg d-flex align-items-center justify-content-between">
+    <h1 class="logo"><a href="/">Sofent</a></h1>
+    <!-- Uncomment below if you prefer to use an image logo -->
+    <!-- <a href="index.html" class="logo"><img src="static/assets/img/logo.png" alt="" class="img-fluid"></a>-->
+
+    <nav id="navbar" class="navbar">
+      <ul>
+        <li><a class="nav-link scrollto" href="/">Home</a></li>
+        <li><a class="nav-link scrollto" href="/about/">About</a></li>
+        <li><a href="/store/">Store</a></li>
+        <li><a href="/donate/" class="active">Charity</a></li>
+        <li><a href="/research/">Research</a></li>
+        {% if user.is_authenticated %}
+        <li class="dropdown d-lg-none"><a href="#"><span>Account</span> <i class="bi bi-chevron-down"></i></a>
+          <ul>
+            <li>
+              <a href="/accounts/profile/" class="justify-content-start me-1">
+                <span class="ms-0">Dashboard</span>
+              </a>
+            </li>
+            <li>
+              <a href="/accounts/logout/" class="justify-content-start me-1">
+                Logout
+              </a>
+            </li>
+            {% if request.user.is_admin %}
+            <li>
+              <a href="/admin/" class="justify-content-start me-1">
+                Admin
+              </a>
+            </li>
+            {% endif %}
+          </ul>
+        </li>
+        {% else %}
+        <li><a href="/accounts/login/">Login</a></li>
+        {% endif %}
+      </ul>
+      <i class="bi bi-list mobile-nav-toggle"></i>
+    </nav>
+
+    {% if user.is_authenticated %}
+    <nav id="" class="navbar align-items-center d-none d-lg-block">
+      <ul>
+        <li class="dropdown">
+          <a href="#">
+            <span>Account</span>
+            <i class="bi bi-chevron-down"></i>
+          </a>
+          <ul>
+            <li>
+              <a href="/accounts/profile/" class="justify-content-start me-1">
+                <span class="ms-0">Dashboard</span>
+              </a>
+            </li>
+            <li>
+              <a href="/accounts/logout/" class="justify-content-start me-1">
+                Logout
+              </a>
+            </li>
+            {% if request.user.is_admin %}
+            <li>
+              <a href="/admin/" class="justify-content-start me-1">
+                Admin
+              </a>
+            </li>
+            {% endif %}
+        </li>
+      </ul>
+    </nav>
+    {% else  %}
+    <a href="/accounts/login" class="btn btn-ceal d-none d-lg-inline-block px-4 fw-bolder">Login</a>
+    {% endif %}
+    <!-- .navbar -->
+  </div>
+</header>
+{% elif research %}
+<header id="header" class="fixed-top">
+  <div class="container-lg d-flex align-items-center justify-content-between">
+    <h1 class="logo"><a href="/">Sofent</a></h1>
+    <!-- Uncomment below if you prefer to use an image logo -->
+    <!-- <a href="index.html" class="logo"><img src="static/assets/img/logo.png" alt="" class="img-fluid"></a>-->
+    <nav id="navbar" class="navbar">
+      <ul>
+        <li><a class="nav-link scrollto" href="/">Home</a></li>
+        <li><a class="nav-link scrollto" href="/about/">About</a></li>
+        <li><a class="nav-link" href="/farms/">Farms</a></li>
+        <li><a href="/store/">E-commerce</a></li>
+        <li><a href="/donate/">Charity</a></li>
+        <li><a href="/research/ active">Research</a></li>
+        {% if user.is_authenticated %}
+        <li class="dropdown d-lg-none"><a href="#"><span>Account</span> <i class="bi bi-chevron-down"></i></a>
+          <ul>
+            <li>
+              <a href="/accounts/profile/" class="justify-content-start me-1">
+                <span class="ms-0">Dashboard</span>
+              </a>
+            </li>
+            <li>
+              <a href="/accounts/logout/" class="justify-content-start me-1">
+                Logout
+              </a>
+            </li>
+            {% if request.user.is_admin %}
+            <li>
+              <a href="/admin/" class="justify-content-start me-1">
+                Admin
+              </a>
+            </li>
+            {% endif %}
+          </ul>
+        </li>
+        {% else %}
+        <li><a href="/accounts/login/">Login</a></li>
+        {% endif %}
+      </ul>
+      <i class="bi bi-list mobile-nav-toggle"></i>
+    </nav>
+
+    {% if user.is_authenticated %}
+    <nav id="" class="navbar align-items-center d-none d-lg-block">
+      <ul>
+        <li class="dropdown">
+          <a class="cursor-pointer  d-flex align-items-center">
+            <span>Account</span>
+            <i class="bi bi-chevron-down"></i>
+          </a>
+          <ul>
+            <li>
+              <a href="/accounts/profile/" class="justify-content-start me-1">
+                <span class="ms-0">Dashboard</span>
+              </a>
+            </li>
+            <li>
+              <a href="/accounts/logout/" class="justify-content-start me-1">
+                Logout
+              </a>
+            </li>
+            {% if request.user.is_admin %}
+            <li>
+              <a href="/admin/" class="justify-content-start me-1">
+                Admin
+              </a>
+            </li>
+            {% endif %}
+          </ul>
+        </li>
+      </ul>
+    </nav>
+    {% else  %}
+    <a href="/accounts/login" class="btn btn-ceal d-none d-lg-inline-block px-4 fw-bolder">Login</a>
+    {% endif %}
+    <!-- .navbar -->
+  </div>
+</header>
+{% else %}
+<header id="header" class="fixed-top" style="background-color: rgba(0,0,0,0.9);">
+  <div class="container-lg d-flex align-items-center justify-content-between">
+    <h1 class="logo"><a href="/">Sofent</a></h1>
+    <!-- Uncomment below if you prefer to use an image logo -->
+    <!-- <a href="index.html" class="logo"><img src="static/assets/img/logo.png" alt="" class="img-fluid"></a>-->
+    <nav id="navbar" class="navbar">
+      <ul>
+        <li><a class="nav-link scrollto" href="/">Home</a></li>
+        <li><a class="nav-link scrollto" href="/about/">About</a></li>
+        <li><a class="nav-link" href="/farms/">Farms</a></li>
+        <li><a href="/store/">E-commerce</a></li>
+        <li><a href="/donate/">Charity</a></li>
+        <li><a href="/research/">Research</a></li>
+        {% if user.is_authenticated %}
+        <li class="dropdown d-lg-none"><a href="#"><span>Account</span> <i class="bi bi-chevron-down"></i></a>
+          <ul>
+            <li>
+              <a href="/accounts/profile/" class="justify-content-start me-1">
+                <span class="ms-0">Dashboard</span>
+              </a>
+            </li>
+            <li>
+              <a href="/accounts/logout/" class="justify-content-start me-1">
+                Logout
+              </a>
+            </li>
+            {% if request.user.is_admin %}
+            <li>
+              <a href="/admin/" class="justify-content-start me-1">
+                Admin
+              </a>
+            </li>
+            {% endif %}
+          </ul>
+        </li>
+        {% else %}
+        <li><a href="/accounts/login/">Login</a></li>
+        {% endif %}
+      </ul>
+      <i class="bi bi-list mobile-nav-toggle"></i>
+    </nav>
+
+    {% if user.is_authenticated %}
+    <nav id="" class="navbar align-items-center d-none d-lg-block">
+      <ul>
+        <li class="dropdown">
+          <a class="cursor-pointer  d-flex align-items-center">
+            <span>Account</span>
+            <i class="bi bi-chevron-down"></i>
+          </a>
+          <ul>
+            <li>
+              <a href="/accounts/profile/" class="justify-content-start me-1">
+                <span class="ms-0">Dashboard</span>
+              </a>
+            </li>
+            <li>
+              <a href="/accounts/logout/" class="justify-content-start me-1">
+                Logout
+              </a>
+            </li>
+            {% if request.user.is_admin %}
+            <li>
+              <a href="/admin/" class="justify-content-start me-1">
+                Admin
+              </a>
+            </li>
+            {% endif %}
+          </ul>
+        </li>
+      </ul>
+    </nav>
+    {% else  %}
+    <a href="/accounts/login" class="btn btn-ceal d-none d-lg-inline-block px-4 fw-bolder">Login</a>
+    {% endif %}
+    <!-- .navbar -->
+  </div>
+</header>
+{% endif %}

@@ -1,0 +1,43 @@
+{% load static %}
+<!DOCTYPE html>
+
+<head>
+  {% include 'head.html'%}
+  {% block 'extra_css' %}
+
+  {% endblock %}
+</head>
+
+<body>
+
+  <!-- ======= Header ======= -->
+  {% include 'headers.html' %}
+  <!-- End Header -->
+
+  <!-- ======= Hero Section ======= -->
+  {% include 'heros.html' %}
+  <!-- End Hero -->
+
+  <main id="main">
+
+    {% block 'main' %}
+
+    {% endblock %}
+
+  </main><!-- End #main -->
+
+  <!-- ======= Footer ======= -->
+  {% include 'footer.html' %}
+  <!-- End Footer -->
+
+  <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i
+      class="bi bi-arrow-up-short"></i></a>
+
+  {% include 'scripts.html' %}
+  {% block 'extra_js' %}
+
+  {% endblock %}
+
+</body>
+
+</html>

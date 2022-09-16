@@ -1,0 +1,12 @@
+{% block subject %} You have a new open from {{receiver.username}}{% endblock %}
+
+{% block plain %}
+Hi {{receiver.first_name}}, you have a new open sale from {{sender.username}} for {{sale.item.title}} at ₦{{sale.price}}.
+
+{{message}}
+
+Visit {{response_url}} to respond.
+
+If you have any issue reach us at contact@sofentng.org or admin@sofentng.org.
+
+{% endblock %}

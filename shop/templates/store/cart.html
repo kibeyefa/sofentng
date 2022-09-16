@@ -1,0 +1,119 @@
+{% extends 'base.html' %} {% block 'extra_css' %}
+<style>
+	.card p {
+		font-size: 14px;
+	}
+
+	.card .card-img {
+		min-width: 100px;
+	}
+
+	.form-control {
+		outline: none;
+	}
+
+	.form-control:focus {
+		border-color: #92278f;
+		outline: 0;
+	}
+
+	.input-group .btn-ceal {
+		background-color: var(--color-secondary);
+		color: white;
+		border: 1px solid var(--color-secondary);
+	}
+</style>
+
+{% endblock %} {% block 'main' %}
+<main id="main pt-1">
+	<div class="pt-5 mt-5 shadow-sm" id="breadcrumb" style="background-color: #f6f4f4">
+		<div class="container">
+			<div class="d-flex justify-content-between align-items-center">
+				<h3>Cart</h3>
+
+				<nav aria-label="breadcrumb">
+					<ol class="breadcrumb">
+						<li class="breadcrumb-item"><a href="/">Home</a></li>
+						<li class="breadcrumb-item"><a href="/store/">Store</a></li>
+						<li class="breadcrumb-item active" aria-current="page">Cart</li>
+					</ol>
+				</nav>
+			</div>
+		</div>
+	</div>
+
+	<div class="container my-5">
+		<div class="row flex-lg-row-reverse gx-3">
+			<div class="col-lg-5">
+				<div class="card border-0 shadow rounded-1 p-3 mb-4 mt-lg-4 pt-3">
+					<div class="d-flex justify-content-between align-items-center">
+						<p class="">Subtotal</p>
+						<strong>&#8358;{{cart.total_price}}</strong>
+					</div>
+					<div class="d-flex justify-content-between align-items-center">
+						<p class="card-titl">Delivery</p>
+						<strong>&#8358;0</strong>
+					</div>
+					<div class="d-flex justify-content-between align-items-center">
+						<p class="card-titl">Total</p>
+						<strong>&#8358;{{ cart.total_price }}</strong>
+					</div>
+					<!-- <div class="input-group">
+						<input type="text" class="form-control rounded-0" />
+						<button class="btn btn-ceal ms-2 rounded-0">Apply Coupon</button>
+					</div> -->
+					<a href="/store/cart/checkout/" class="btn btn-ceal rounded-0 mt-2">Proceed to checkout</a>
+				</div>
+			</div>
+
+			<div class="col-lg-7">
+				<p class="text-black-50 mb-1">
+					Cart({{ cart.items.count }})
+				</p>
+				{% for order_item in cart.items.all %}
+				<div class="card shadow-sm mb-3">
+					<div class="card-body p-0">
+						<div class="d-flex">
+							<div class="me-1 w-25 card-img">
+								<img src="{{order_item.item.get_first_image_url}}" alt="" class="img-fluid w-100 h-100" />
+							</div>
+							<div>
+								<p class="mb-0">{{order_item.item.title}}</p>
+								<p class="mb-0">Seller: Store</p>
+								<h6>&#8358;{{order_item.item.price}}</h6>
+							</div>
+						</div>
+					</div>
+					<div class="card-footer">
+						<div class="d-flex justify-content-between align-items-center w-100">
+							<div class="">
+								<a href="{{order_item.item.remove_from_cart_url}}?next=cart" class="bi bi-trash">
+									Remove</a>
+							</div>
+							<form action="">
+								<div class="input-group input-group-sm">
+									<a href="{{order_item.item.reduce_items_in_cart_url}}?next=cart"
+										class="btn btn-sm btn-ceal fw-bold input-group-text"><i class="bi bi-dash-lg"></i></a>
+									<input type="text" class="form-control text-center" style="max-width: 40px"
+										value="{{ order_item.quantity }}" />
+									<a href="{{order_item.item.add_to_cart_url}}?next=cart"
+										class="btn btn-ceal fw-bold input-group-text"><i class="bi bi-plus-lg"></i></a>
+								</div>
+							</form>
+						</div>
+					</div>
+				</div>
+				{% empty %}
+				<h4>There are no items in you cart</h4>
+				{% endfor %}
+
+			</div>
+		</div>
+	</div>
+</main>
+{% endblock %} {% block 'extra_js' %}
+<script>
+	document.getElementById('header').style.background = 'rgba(0, 0, 0, 0.9)';
+	document.getElementById('store-hero').style.display = 'none';
+</script>
+{% endblock %}

@@ -1,0 +1,580 @@
+{% extends 'base.html' %}
+{% load static %}
+
+
+{% block 'extra_css' %}
+<!-- <link rel="stylesheet" href="https://unpkg.com/swiper@8/swiper-bundle.min.css" /> -->
+<link rel="stylesheet" href="/static/assets/vendor/owlcarousel/assets/owl.carousel.min.css">
+<link rel="stylesheet" href="/static/assets/vendor/owlcarousel/assets/owl.theme.default.css">
+
+<style>
+  textarea {
+    height: 120px;
+  }
+
+  .m-w-75 {
+    max-width: 75%;
+    /* padding: 2px;
+    border-radius: 3px;
+    background-color: var(--bs-light); */
+  }
+
+  .input-group .btn-secondary {
+    background-color: var(--color-secondary);
+    color: white;
+    border: 1px solid var(--color-secondary);
+    border-radius: 0;
+  }
+
+  .form-control:focus {
+    box-shadow: none !important;
+    border: 1px solid var(--color-ceal);
+  }
+
+  .nav-pills .nav-link {
+    border-radius: 0 !important;
+    border-bottom: none !important;
+    color: var(--color-ceal) !important;
+  }
+
+  .nav-pills .nav-link.active {
+    background-color: white !important;
+    border: 1px solid #dee2e6 !important;
+    color: black !important;
+    border-bottom: none !important;
+  }
+
+  .tab-pane {
+    padding-top: 15px;
+  }
+
+  .section-title {
+    position: relative;
+    display: inline-block;
+    letter-spacing: 1px;
+    color: #1C1C1C;
+    font-weight: bold;
+    /*font-family: "Poppins", sans-serif; */
+  }
+
+  .section-title span {
+    background-color: white;
+  }
+
+  .section-title::before {
+    position: absolute;
+    content: "";
+    top: 25%;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    margin-top: -1px;
+    background: #1C1C1C;
+    z-index: -1;
+  }
+
+  .bi-star-fill {
+    color: gold;
+  }
+</style>
+{% endblock %}
+
+{% block 'main' %}
+<main id="main">
+  <div class="pt-5" style="background-color: #f6f4f4;">
+    <div class="container mt-5">
+      <div class="d-flex justify-content-between align-items-center">
+        <h3>Store</h3>
+
+        <nav aria-label="breadcrumb">
+          <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="/">Home</a></li>
+            <li class="breadcrumb-item"><a href="/store/">Store</a></li>
+            <li class="breadcrumb-item active" aria-current="page">{{item.title}}</li>
+          </ol>
+        </nav>
+      </div>
+    </div>
+  </div>
+
+  <section id="detail">
+    <div class="container-lg">
+      <h4></h4>
+
+      <div class="row gx-lg-5">
+        <div class="col-12 col-sm-6">
+          <!-- Slider main container -->
+          <div class="swiper swiper-1 h-100">
+            <!-- Additional required wrapper -->
+            <div class="swiper-wrapper h-100">
+              <!-- Slides -->
+              {% for url in item.get_all_images_url %}
+              <div class="swiper-slide h-100">
+                <div class="card border-1 h-100">
+                  <img src="{{url}}" alt="" class="w-100 h-100">
+                  <!-- <div class="card-body">
+                      <h6 class="card-title text-black text-truncate">Product name</h6>
+                      <p class=" card-subtitle">&#8358;20</p>
+                    </div> -->
+                </div>
+              </div>
+              {% endfor %}
+            </div>
+            <!-- If we need pagination -->
+            <div class="swiper-pagination"></div>
+
+            <!-- If we need navigation buttons -->
+            <div class="swiper-button-prev swiper-controls text-black-50"></div>
+            <div class="swiper-button-next swiper-controls text-black-50"></div>
+
+            <!-- If we need scrollbar -->
+            <!-- <div class="swiper-scrollbar"></div> -->
+          </div>
+        </div>
+
+        <div class="col-12 col-sm-6 pt-3">
+          <div class="d-flex align-items-end mb-2 px-1 px-lg-0">
+            <h4>{{item.title}}</h4>
+            <a href="" class="ms-auto bi-heart fs-4"></a>
+
+          </div>
+
+          {% if sales.count > 0 %}
+          <h5 class="fw-bolder">
+            {% if sales.first.price != item.price %}
+            <span class="text-muted text-decoration-line-through fs-6 me-1 fw-light">&#8358;{{item.price}}</span>/<span
+              class="">&#8358;{{sales.first.price}}</span>
+            {% else  %}
+            <span class="">&#8358;{{sales.first.price}}</span>
+            {% endif %}
+          </h5>
+          {% else  %}
+          <h5 class="fw-bolder">&#8358;{{item.price}}</h5>
+          {% endif %}
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Desc, Reviews, Chat and sale section -->
+  <section class="container-lg">
+    <ul class="w-100 text-center nav nav-tabs nav-pills justify-content-center">
+      <li class="nav-item">
+        <a class="nav-link active" data-bs-toggle="tab" aria-current="page" href="#description">Description</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" data-bs-toggle="tab" href="#review">Reviews</a>
+      </li>
+      {% if user != item.seller %}
+      <li class="nav-item">
+        <a class="nav-link" data-bs-toggle="tab" href="#chat">Chat</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" data-bs-toggle="tab" href="#make-sale">Purchase</a>
+      </li>
+      {% endif %}
+    </ul>
+
+    <div class="tab-content">
+      <!-- Item decsription -->
+      <div class="tab-pane " id="description" role="tabpanel" aria-labelledby="home-tab" tabindex="0">
+        <h4 class="py-2">Product description</h4>
+        <p>{{item.description}}</p>
+      </div>
+      <!-- End Item decsription -->
+
+      <!-- Item reviews -->
+      <div class="tab-pane" id="review" role="tabpanel" aria-labelledby="profile-tab" tabindex="0">
+        <h4 class="py-2">Product reveiws</h4>
+
+        <div class="row gx-5 flex-column-reverse flex-lg-row">
+
+          <!-- Rating form -->
+          {% if user.is_authenticated and user != item.seller %}
+          <div class="col-lg-6">
+            <form action="/store/detail/{{item.slug}}/add-review/" method="post">
+              {% csrf_token %}
+              <div class="mb-3">
+                <label for="subject">Stars</label>
+                <i class="bi bi-star star cursor-pointer mx-1" data-star-amount="1" id="first-star"></i>
+                <i class="bi bi-star star cursor-pointer me-1" data-star-amount="2"></i>
+                <i class="bi bi-star star cursor-pointer me-1" data-star-amount="3"></i>
+                <i class="bi bi-star star cursor-pointer me-1" data-star-amount="4"></i>
+                <i class="bi bi-star star cursor-pointer" data-star-amount="5"></i>
+
+                <!-- <span class="btn btn-sm btn-secondary ms-3 star" data-star-amount="0">clear</span> -->
+              </div>
+              <div class="mb-3">
+                <label for="subject">Subject</label>
+                <input type="text" class="form-control rounded-0" name="subject" maxlength="50">
+                <input type="number" name="stars" class="d-none" value="0" id="star-rating" required>
+              </div>
+              <div class="mb-3">
+                <label for="review">Review</label>
+                <textarea id="review" class="form-control rounded-0" name="review" maxlength="1500"
+                  style="height: 100px;"></textarea>
+              </div>
+
+              <div class=" text-end"><button type="submit" class="btn btn-ceal">Submit review</button></div>
+            </form>
+          </div>
+          {% endif %}
+
+          <div class="{% if user.is_authenticated %} col-lg-6 {% endif %} mb-3 mb-lg-0">
+            <div id="reviews">
+              {% for review in item.reviews.all|slice:":5" %}
+              <div class="card rounded-0 mt-2">
+                <div class="card-header d-flex align-items-center">
+                  <p class="card-title me-3 mb-0">{{review.subject}}</p>
+
+                  <div>
+                    <i class="bi {% if review.stars <= 1  %} bi-star {% else %} bi-star-fill {% endif %}"></i>
+                    <i class="bi {% if review.stars <= 2  %} bi-star {% else %} bi-star-fill {% endif %}"></i>
+                    <i class="bi {% if review.stars <= 3  %} bi-star {% else %} bi-star-fill {% endif %}"></i>
+                    <i class="bi {% if review.stars <= 4  %} bi-star {% else %} bi-star-fill {% endif %}"></i>
+                    <i class="bi {% if review.stars == 5  %} bi-star-fill {% else %} bi-star {% endif %}"></i>
+                  </div>
+                </div>
+
+                <div class="card-body">
+                  <p class=" card-text">
+                    {{ review.review }}
+                  </p>
+
+                  -<cite class="small">{{review.sender.username}}</>
+                </div>
+              </div>
+              {% endfor %}
+            </div>
+
+            <div class="text-center mt-3">
+              {% if item.reviews.all.count > 5 %}
+              <button class="btn btn-link" id="load-more">Load more</button>
+              {% endif %}
+            </div>
+          </div>
+
+
+        </div>
+      </div>
+      <!-- End Item reviews -->
+
+      {% if user != item.seller %}
+      <!-- Chat -->
+      <div class="tab-pane" id="chat" role="tabpanel" aria-labelledby="messages-tab" tabindex="0">
+        <div class="row gx-lg-5">
+          {% if user.is_authenticated %}
+          <div class="col-lg-8">
+            <div class="d-flex flex-column">
+              {% for message in chat.messages.all %}
+              {% if message.sender == user %}
+              <span class="message align-start m-w-75">
+                {{message.message}}
+              </span>
+              {% else %}
+              <span class="message align-self-end ms-auto m-w-75">
+                {{message.message}}
+              </span>
+              {% endif %}
+              {% endfor %}
+            </div>
+          </div>
+          <div class="col-lg-4">
+            <form action="" method="post">
+              {% csrf_token %}
+              <div class="input-group">
+                <textarea name="message" id="" class="form-control rounded-0 h-100" maxlength=""></textarea>
+                <button class="btn btn-ceal h-100 rounded-1" type="submit">Send</button>
+              </div>
+            </form>
+          </div>
+          {% else %}
+          <div class="my-3 text-center">
+            <a href="/accounts/login/?next=/store/detail/{{item.slug}}/" class="btn btn-ceal">Login</a>
+          </div>
+          {% endif %}
+        </div>
+      </div>
+      <!-- End chat -->
+
+      <!-- Sale section -->
+      <div class="tab-pane" id="make-sale" role="tabpanel" aria-labelledby="settings-tab" tabindex="0">
+        {% if user.is_authenticated %}
+        {% if sales.count > 0 %}
+        <ul class="list-group">
+          <li class="list-group-item d-flex justify-content-between align-items-center">
+            <span>
+              {{item.title}}
+              <span class="badge bg-primary">{% include 'naira.html' %}{{sales.first.price}}</span>
+
+            </span>
+            <div class="btn-group btn-group-sm">
+              <a href="/store/delete-sale/{{sales.first.id}}/?next=/store/detail/{{item.slug}}/"
+                class="btn btn-outline-danger me-1">Delete</a>
+              <button class="btn btn-ceal" onclick="payWithPaystack()">Pay</button>
+            </div>
+          </li>
+        </ul>
+        {% else  %}
+        <div class="text-center mt-3">
+
+
+          <form class="d-non" id="defaultPurchaseForm">
+            {% csrf_token %}
+            <input type="hidden" value="{{item.id}}" name="item">
+            <input type="hidden" value="{{item.price}}" name="price">
+            <input type="hidden" value="{{user.id}}" name="buyer">
+            <div class="input-group">
+              <input type="number" name="quantity" placeholder="Quantity" class="form-control">
+              <button type="button" class="btn btn-ceal" onclick="payDefaulWithPaystack()">Purchase</button>
+            </div>
+          </form>
+        </div>
+        {% endif %}
+
+        {% else  %}
+        <a href="/accounts/login/?next=/store/detail/{{item.slug}}/">Login to buy item</a>
+
+        {% endif %}
+      </div>
+      <!-- End sale section -->
+      {% endif %}
+    </div>
+  </section>
+  <!-- End desc, reviews, chat and sale section -->
+
+
+  <!-- Similar Items -->
+  <section id="similar">
+    <div class="text-center mb-">
+      <h3 class="section-title px-5 small-caps"><span class="px-2">similar products</span></h3>
+    </div>
+
+    <div class="container-lg">
+      <!-- Slider main container -->
+      <div class="swiper swiper-2">
+        <!-- Additional required wrapper -->
+        <div class="swiper-wrapper">
+          <!-- Slides -->
+          {% for item in list %}
+          <div class="swiper-slide">
+            <div class="card border-1">
+              <a href="/store/detail/{{item.slug}}/">
+                <img src="{{item.get_first_image_url}}" alt="" class=" card-img-top" height="150px">
+                <div class="card-body">
+                  <h6 class="card-title text-black text-truncate">{{item.title}}</h6>
+                  <p class=" card-subtitle">&#8358;{{item.price}}</p>
+                </div>
+              </a>
+            </div>
+          </div>
+          {% endfor %}
+
+
+        </div>
+        <!-- If we need pagination -->
+        <div class="swiper-pagination"></div>
+
+        <!-- If we need navigation buttons -->
+        <div class="swiper-button-prev swiper-controls text-black-50"></div>
+        <div class="swiper-button-next swiper-controls text-black-50"></div>
+
+        <!-- If we need scrollbar -->
+        <!-- <div class="swiper-scrollbar"></div> -->
+      </div>
+    </div>
+
+  </section>
+  <!-- End similar items -->
+</main>
+{% endblock %}
+
+{% block 'extra_js' %}
+<!-- <script src="https://unpkg.com/swiper@8/swiper-bundle.min.js"></script> -->
+<script src="/static/assets/jquery.min.js"></script>
+<script src="/static/assets/vendor/owlcarousel/owl.carousel.min.js"></script>
+<script>
+  document.getElementById('header').style.background = 'rgba(0,0,0, 0.9)';
+  $('#store-hero').css('display', 'none');
+  const swiper = new Swiper('.swiper-1', {
+    // Default parameters
+    slidesPerView: 1,
+    spaceBetween: 10,
+    // Responsive breakpoints
+
+  })
+
+  const swiper_2 = new Swiper('.swiper-2', {
+    // Default parameters
+    slidesPerView: 2,
+    spaceBetween: 10,
+    //loop: true,
+    // Responsive breakpoints
+    breakpoints: {
+      // when window width is >= 320px
+      320: {
+        slidesPerView: 2,
+        spaceBetween: 20
+      },
+      // when window width is >= 480px
+      480: {
+        slidesPerView: 3,
+        spaceBetween: 30
+      },
+      // when window width is >= 640px
+      640: {
+        slidesPerView: 4,
+        spaceBetween: 40
+      }
+    }
+
+  })
+
+
+
+  $('.swiper-1 .swiper-button-next').click(() => {
+    swiper.slideNext()
+    console.log('Hello world')
+  })
+
+  $('.swiper-1 .swiper-button-prev').click(() => {
+    swiper.slidePrev()
+  })
+
+  $('.swiper-2 .swiper-button-next').click(() => {
+    swiper_2.slideNext()
+  })
+
+  $('.swiper-2 .swiper-button-prev').click(() => {
+    swiper_2.slidePrev()
+  })
+</script>
+
+<!-- Star rating functionality -->
+<script>
+  let startRating = document.getElementById('star-rating');
+  let firstStar = document.getElementById('first-star');
+  $('.star').click((e) => {
+    if (e.target === firstStar && startRating.value === '1') {
+      firstStar.classList.replace('bi-star-fill', 'bi-star')
+      startRating.value = 0
+      return
+    }
+    startRating.value = e.target.getAttribute('data-star-amount')
+    changeStars()
+  })
+
+  function changeStars(e) {
+    $('.star').each((index, elem) => {
+      elem.classList.replace('bi-star-fill', 'bi-star')
+      if (elem.getAttribute('data-star-amount') <= startRating.value) {
+        elem.classList.replace('bi-star', 'bi-star-fill')
+      }
+    })
+  }
+</script>
+
+<!-- Load extra reviews -->
+<script>
+  let page = 1
+  let next = "/store/item-reviews/{{item.slug}}/?page=2"
+
+  $('#load-more').click(e => {
+    $.get(next)
+      .done(data => {
+        next = data.next
+
+        $(data.results).each((index, elem) => {
+          div = document.createElement('div')
+          div.innerHTML = `
+            <div class="card rounded-0 mt-2">
+              <div class="card-header d-flex align-items-center">
+                <p class="card-title me-3 mb-0">${elem.subject}</p>
+
+                <div>
+                  <i class="bi ${elem.stars <= 1 ? 'bi-star' : 'bi-star-fill'}"></i>
+                  <i class="bi ${elem.stars <= 2 ? 'bi-star' : 'bi-star-fill'}"></i>
+                  <i class="bi ${elem.stars <= 3 ? 'bi-star' : 'bi-star-fill'}"></i>
+                  <i class="bi ${elem.stars <= 4 ? 'bi-star' : 'bi-star-fill'}"></i>
+                  <i class="bi ${elem.stars === 5 ? 'bi-star-fill' : 'bi-star'}"></i>
+                </div>
+              </div>
+
+              <div class="card-body">
+                <p class=" card-text">
+                  ${elem.review}
+                </p>
+
+                -<cite title="Review sender" class="small">${elem.sender}</cite>
+              </div>
+            </div> 
+            `
+          $('#reviews').append(div)
+          console.log(div)
+        })
+        if (next === null) {
+          $('#load-more').attr('disabled', true)
+        }
+      })
+  })
+</script>
+
+
+<script src="https://js.paystack.co/v1/inline.js"></script>
+
+<!-- Payment -->
+{% if sales.count > 0 %}
+<script>
+  function payWithPaystack() {
+    let handler = PaystackPop.setup({
+      key: 'pk_test_ea591b2b61ee08638efa6bc5d666413f704f9cb2', // Replace with your public key
+      email: '{{user.email}}',
+      amount: parseFloat('{{sales.first.total_price}}') * 100,
+      ref: '{{sales.first.id}}', // generates a pseudo-unique reference. Please replace with a reference you generated. Or remove the line entirely so our API will generate one for you
+      // label: "Optional string that replaces customer email"
+      onClose: function () {
+        alert('Transaction canceled.');
+      },
+      callback: function (response) {
+        let message = 'Payment complete! Reference: ' + response.reference;
+        //alert(message);
+        window.location = '/store/confirm-purchase/{{sales.first.id}}/' + `?next=${window.location.pathname}`
+      }
+    });
+    handler.openIframe();
+  }
+</script>
+{% else  %}
+<script>
+  function payDefaultAmount(data) {
+    let handler = PaystackPop.setup({
+      key: 'pk_test_ea591b2b61ee08638efa6bc5d666413f704f9cb2', // Replace with your public key
+      email: '{{user.email}}',
+      amount: data.total_price * 100,
+      ref: data.id, // generates a pseudo-unique reference. Please replace with a reference you generated. Or remove the line entirely so our API will generate one for you
+      // label: "Optional string that replaces customer email"
+      onClose: function () {
+        alert('Something went wrong.');
+      },
+      callback: function (response) {
+        let message = 'Payment complete! Reference: ' + response.reference;
+        //alert(message);
+        window.location = `/store/confirm-purchase/${data.id}/?next=${window.location.pathname}`
+      }
+    });
+    handler.openIframe();
+  }
+
+  function payDefaulWithPaystack(e) {
+    $.post('/store/sales/create/', $('#defaultPurchaseForm').serialize())
+      .done((data) => {
+        payDefaultAmount(data)
+      })
+      .fail((fail_data) => {
+        alert('Something went wrong')
+      })
+  }
+</script>
+{% endif %}
+
+{% endblock %}

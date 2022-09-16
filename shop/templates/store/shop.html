@@ -1,0 +1,279 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load shop_tags %}
+
+
+{% block 'extra_css' %}
+<style>
+  .form-control {
+    border-radius: 0 !important;
+  }
+
+
+
+  .form-control:focus {
+    border: 1px solid var(--color-ceal);
+    box-shadow: none !important;
+  }
+</style>
+{% endblock %}
+
+
+{% block 'main' %}
+<!-- <div class="alert-div">
+  {% if messages %}
+  {% for message in messages %}
+  <div class="alert alert-{{message.tags}} alert-dismissible fade show rounded-0" role="alert">
+    <div class="container-lg">
+      {{message}}
+      <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+  </div>
+  {% endfor %}
+  {% endif %}
+</div> -->
+
+<main id="main">
+  <div class="pt-5 shadow-sm" id="breadcrumb" style="background-color: #f6f4f4;">
+    <div class="container mt-5">
+      <div class="d-flex justify-content-between align-items-center">
+        <h3>Store</h3>
+
+        <nav aria-label="breadcrumb">
+          <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="/">Home</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Store</li>
+          </ol>
+        </nav>
+      </div>
+    </div>
+
+    <div class="alert-div">
+      {% if messages %}
+      {% for message in messages %}
+      <div class="alert alert-{{message.tags}} alert-dismissible fade show rounded-0" role="alert">
+        <div class="container-lg">
+          {{message}}
+          <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+      </div>
+      {% endfor %}
+      {% endif %}
+    </div>
+  </div>
+
+  <section id="shop">
+    <div class="container-lg justify-content-end">
+      <div class="d-flex justify-content-end">
+        <div class=" col-lg-5  mb-3">
+          <form action="" method="post">
+            {% csrf_token %}
+            <div class="input-group">
+              <input type="Search" name="q" class="form-control" placeholder="Search..."></input>
+              <button class="btn input-group-text btn-ceal bi bi-search"> Search</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+
+
+    <div class="container-lg">
+      <h4 class="text-black fw-bold small-caps">recent products</h4>
+      <div class="row gx-2 gy-3 gy-lg-4 pb-4">
+        {% if obj_list %}
+        {% for item in obj_list %}
+        <div class="col-12 col-sm-6 col-md-4 col-lg-3">
+          <a href="/store/detail/{{item.slug}}">
+            <div class="card shadow-sm rounded-0">
+              <img src="{{item.get_first_image_url}}" class="card-img-top" alt="..." width="200px" height="250px">
+              <div class="card-body">
+                <div class="d-flex justify-content-between">
+                  <h6 class="card-title fw-bold me-auto text-black">{{item.title}}</h6>
+                  <a class="ms-auto bi bi-heart"></a>
+                </div>
+                <p class="card-text text-truncate">
+                  <span>&#8358;{{item.price}}</span>
+                </p>
+                <div class=" card-foot d-flex justify-content-between align-items-center">
+                  {% if item.seller == user %}
+                  <span class="small">Posted by you</span>
+                  {% else  %}
+                  <a href="/store/detail/{{item.slug}}" class="btn btn-ceal">Buy item</a>
+                  {% endif %}
+                  <!-- <a href="{% add_or_remove_url cart request.user item %}"><i class=""></i>
+                    {% add_or_remove cart request.user item %}</a> -->
+                </div>
+              </div>
+            </div>
+          </a>
+        </div>
+        {% endfor %}
+        {% else  %}
+        <h3>No items available</h3>
+        {% endif %}
+      </div>
+
+      {% if obj_list %}
+      <div class="text-center pb-5">
+        <div class="btn-group btn-group-sm">
+          {% if obj_list.has_previous %}
+          <a href="?page=1" class="btn btn btn-outline-dark bi bi-chevron-double-left"></a>
+          <a href="?page={{obj_list.previous_page_number}}" class="btn btn btn-outline-dark bi bi-chevron-left"></a>
+          {% endif %}
+          <button class="btn btn-dark">{{obj_list.number}}</button>
+          {% if obj_list.has_next %}
+          <a href="?page={{obj_list.next_page_number}}" class="btn btn-outline-dark bi bi-chevron-right"></a>
+          <a href="?page={{obj_list.paginator.num_pages}}" class="btn btn-outline-dark bi bi-chevron-double-right"></a>
+          {% endif %}
+        </div>
+      </div>
+      {% endif %}
+
+
+      <div class="container-fluid px-2 px-lg-3 py-lg-4 py-3  my-4" style="background-color: #f6f6f4;">
+        <h6 class="text-blind">{{list1_name.title}}</h6>
+
+        <!-- Slider main container -->
+        <div class="swiper swiper-1">
+          <!-- Additional required wrapper -->
+          <div class="swiper-wrapper">
+            <!-- Slides -->
+            {% for item in list1 %}
+            <div class="swiper-slide">
+              <div class="card border-1">
+                <a href="/store/detail/{{item.slug}}">
+                  <img src="{{item.get_first_image_url}}" alt="" class=" card-img-top" height="150px">
+                  <div class="card-body">
+                    <h6 class="card-title text-black text-truncate">{{item.title}}</h6>
+                    <p class=" card-subtitle">&#8358;{{item.price}}</p>
+                  </div>
+                </a>
+              </div>
+            </div>
+            {% endfor %}
+
+
+          </div>
+          <!-- If we need pagination -->
+          <div class="swiper-pagination"></div>
+
+          <!-- If we need navigation buttons -->
+          <div class="swiper-button-prev swiper-controls text-black-50"></div>
+          <div class="swiper-button-next swiper-controls text-black-50"></div>
+
+          <!-- If we need scrollbar -->
+          <!-- <div class="swiper-scrollbar"></div> -->
+        </div>
+      </div>
+      <div class="container-fluid px-2 px-lg-3 py-lg-4 py-3  my-4" style="background-color: #f6f6f4;">
+        <h6 class="text-blind">{{list2_name.title}}</h6>
+
+        <!-- Slider main container -->
+        <div class="swiper swiper-2">
+          <!-- Additional required wrapper -->
+          <div class="swiper-wrapper">
+            <!-- Slides -->
+            {% for item in list2 %}
+            <div class="swiper-slide">
+              <div class="card border-1">
+                <a href="/store/detail/{{item.slug}}/">
+                  <img src="{{item.get_first_image_url}}" alt="" class=" card-img-top" height="150px">
+                  <div class="card-body">
+                    <h6 class="card-title text-black text-truncate">{{item.title}}</h6>
+                    <p class=" card-subtitle">&#8358;{{item.price}}</p>
+                  </div>
+                </a>
+              </div>
+            </div>
+            {% endfor %}
+          </div>
+          <!-- If we need pagination -->
+          <div class="swiper-pagination"></div>
+
+          <!-- If we need navigation buttons -->
+          <div class="swiper-button-prev swiper-controls text-black-50"></div>
+          <div class="swiper-button-next swiper-controls text-black-50"></div>
+
+          <!-- If we need scrollbar -->
+          <!-- <div class="swiper-scrollbar"></div> -->
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+{% endblock %}
+
+{% block 'extra_js' %}
+<!-- <script src="https://unpkg.com/swiper@8/swiper-bundle.min.js"></script> -->
+<script src="/static/assets/jquery.min.js"></script>
+<script src="/static/assets/vendor/owlcarousel/owl.carousel.min.js"></script>
+<script>
+  const swiper = new Swiper('.swiper-1', {
+    // Default parameters
+    slidesPerView: 1,
+    spaceBetween: 10,
+    // Responsive breakpoints
+    breakpoints: {
+      // when window width is >= 320px
+      320: {
+        slidesPerView: 2,
+        spaceBetween: 20
+      },
+      // when window width is >= 480px
+      480: {
+        slidesPerView: 3,
+        spaceBetween: 30
+      },
+      // when window width is >= 640px
+      640: {
+        slidesPerView: 4,
+        spaceBetween: 40
+      }
+    }
+  })
+
+  $('.swiper-1 .swiper-button-next').click(() => {
+    swiper.slideNext()
+  })
+
+  $('.swiper-1 .swiper-button-prev').click(() => {
+    swiper.slidePrev()
+  })
+
+
+  const swiper_2 = new Swiper('.swiper-2', {
+    // Default parameters
+    slidesPerView: 1,
+    spaceBetween: 10,
+    // Responsive breakpoints
+    breakpoints: {
+      // when window width is >= 320px
+      320: {
+        slidesPerView: 2,
+        spaceBetween: 20
+      },
+      // when window width is >= 480px
+      480: {
+        slidesPerView: 3,
+        spaceBetween: 30
+      },
+      // when window width is >= 640px
+      640: {
+        slidesPerView: 4,
+        spaceBetween: 40
+      }
+    }
+  })
+
+  $('.swiper-2 .swiper-button-next').click(() => {
+    swiper_2.slideNext()
+  })
+
+  $('.swiper-2 .swiper-button-prev').click(() => {
+    swiper_2.slidePrev()
+  })
+
+
+</script>
+{% endblock %}

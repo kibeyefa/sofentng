@@ -1,0 +1,403 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block 'extra_css' %}
+<style>
+  .max-200 {
+    max-width: 200px;
+  }
+
+  .form-control {
+    box-shadow: none !important;
+    border-radius: 0 !important;
+  }
+
+  .form-control:focus {
+    border: 1px solid #92278f;
+  }
+
+  #farms-hero {
+    width: 100%;
+    height: 100vh;
+    background: url('/static/assets/img/farms-hero.jpg') top center;
+    background-size: cover;
+    position: relative;
+  }
+
+  #farms-hero:before {
+    content: '';
+    background: rgba(0, 0, 0, 0.6);
+    position: absolute;
+    bottom: 0;
+    top: 0;
+    left: 0;
+    right: 0;
+  }
+
+  #farms-hero .farms-hero-container {
+    position: absolute;
+    bottom: 0;
+    top: 0;
+    left: 0;
+    right: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    text-align: center;
+    padding: 0 15px;
+  }
+
+  #farms-hero h3 {
+    background: rgba(255, 255, 255, 0.1);
+    color: #fff;
+    font-size: 26px;
+    padding: 10px 30px;
+    margin-bottom: 30px;
+    border-radius: 50px;
+  }
+
+  #farms-hero h1 {
+    margin: 0 0 10px 0;
+    font-size: 48px;
+    font-weight: 700;
+    line-height: 56px;
+    text-transform: uppercase;
+    color: #fff;
+  }
+
+  #farms-hero h2 {
+    color: #eee;
+    margin-bottom: 40px;
+    font-size: 24px;
+  }
+
+  #farms-hero .btn-get-started {
+    font-family: 'Poppins', sans-serif;
+    text-transform: uppercase;
+    font-weight: 400;
+    font-size: 13px;
+    letter-spacing: 1px;
+    display: inline-block;
+    padding: 8px 30px 9px 30px;
+    border-radius: 50px;
+    transition: 0.5s;
+    border: 2px solid #fff;
+    color: #fff;
+  }
+
+  #farms-hero .btn-get-started:hover {
+    background: #92278f;
+    border: 2px solid #92278f;
+  }
+
+  @media (min-width: 1024px) {
+    #farms-hero {
+      background-attachment: fixed;
+    }
+  }
+
+  @media (max-width: 768px) {
+    #farms-hero h3 {
+      font-size: 22px;
+    }
+
+    #farms-hero h1 {
+      font-size: 28px;
+      line-height: 36px;
+    }
+
+    #farms-hero h2 {
+      font-size: 18px;
+      line-height: 24px;
+      margin-bottom: 30px;
+    }
+  }
+
+  @media (max-height: 500px) {
+    #farms-hero {
+      height: 150vh;
+    }
+  }
+</style>
+{% endblock %}
+
+{% block 'main' %}
+<main id="main">
+  <div class="pt-3 shadow-sm" id="breadcrumb" style="background-color: #f6f4f4;">
+    <div class="container">
+      <div class="d-flex justify-content-between align-items-center">
+        <h3>Farms</h3>
+
+        <nav aria-label="breadcrumb">
+          <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="/">Home</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Farms</li>
+          </ol>
+        </nav>
+      </div>
+    </div>
+  </div>
+
+  <!-- ======= About Section ======= -->
+  <section id="about" class="about">
+    <div class="container">
+      <div class="section-title">
+        <h2>About SOFENT Farms</h2>
+        <h3>Learn More <span>About Us</span></h3>
+        <p>
+          A society of entrepreneurs created solely to improve and better the lives of young entrepreneurs
+        </p>
+      </div>
+
+      <div class="row content">
+        <div class="col-lg-6">
+          <p>
+            A few our available products:
+          </p>
+          <ul>
+            <li>
+              <i class="ri-check-double-line"></i> Pure honey and bee products
+            </li>
+            <li>
+              <i class="ri-check-double-line"></i> Fortified garri.
+            </li>
+            <li>
+              <i class="ri-check-double-line"></i> Soy beans
+            </li>
+            <li>
+              <i class="ri-check-double-line"></i> Poultry products <span class="fw-bold"
+                style="color: var(--color-ceal);">Coming soon.</span>
+            </li>
+          </ul>
+        </div>
+        <div class="col-lg-6 pt-4 pt-lg-0">
+          <p>
+            SOFENT is committed to applying modern ways of food processing, research and problem solving skills to meet
+            the global
+            challenges associated with feeding the world, by contributing to the provision of high quality, safe and
+            nutritionally
+            valuable food and food products. We train members in food processing, branding and marketing so that we can
+            solve many
+            problems associated with food safety and security together.
+          </p>
+          <a href="#booking" class="scrollto btn-learn-more">Book produce</a>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- End About Section -->
+
+  <!-- ======= Services Section ======= -->
+  <section id="services" class="services">
+    <div class="container">
+      <div class="section-title">
+        <h2>Gallery</h2>
+        <h3>SOFENT <span>Farms</span> Gallery</h3>
+        <p>
+          A society of entrepreneurs created solely to improve and better the lives of young entrepreneurs
+        </p>
+      </div>
+      <!-- Gallery -->
+
+
+      <div class="row">
+
+        <div class="col-lg-4 col-md- mb-4 mb-lg-0 h-100">
+          <img src="/static/assets/img/farms/farms-1.jpg" class="w-100 shadow short rounded mb-4"
+            alt="Mountains in the Clouds" />
+          <img src="/static/assets/img/farms/farms-4.jpg" class="w-100 long shadow rounded mb-4"
+            alt="Boat on Calm Water" />
+        </div>
+
+        <div class="col-lg-4 mb-4 mb-lg-0 h-100">
+          <img src="/static/assets/img/farms/farms-1.jpg" class="w-100 shadow rounded mb-4 long"
+            alt="Wintry Mountain Landscape" />
+          <img src="/static/assets/img/farms/farms-5.jpg" class="w-100 shadow rounded mb-4 short"
+            alt="Boat on Calm Water" />
+
+        </div>
+
+        <div class="col-lg-4 mb-4 mb-lg-0 align-items-between h-100">
+          <img src="/static/assets/img/farms/farms-6.jpg" class="w-100 shadow rounded mb-4 short" alt="Waves at Sea" />
+
+          <img src="/static/assets/img/farms/farms-3.jpg" class="w-100 shadow rounded mb-4 long"
+            alt="Yosemite National Park" />
+
+        </div>
+      </div>
+      <!-- Gallery -->
+    </div>
+  </section>
+  <!-- End Services Section -->
+
+
+  <!-- ======= Booking Section ======= -->
+  <section id="booking" class="contact">
+    <div class="container">
+      <div class="section-title">
+        <h2>Order</h2>
+        <h3>Order <span>Farm produce</span></h3>
+        <p>
+          Order your farm produce below.
+        </p>
+      </div>
+
+      <div class="row mt-5">
+        <div class="col-lg-4">
+          <div>
+            <img src="/static/assets/img/sofent-logo.jpg" alt="" class="img-fluid">
+          </div>
+        </div>
+
+        <div class="col-lg-8 mt-5 mt-lg-5">
+          <form action="" method="post" role="form" class="php-email-form" id="form">
+            {% csrf_token %}
+            <div class="row">
+              <div class="col-md-6 form-group">
+                <input type="text" name="first_name" class="form-control" id="name" placeholder="Your First Name"
+                  required />
+              </div>
+              <div class="col-md-6 form-group  mt-3 mt-md-0">
+                <input type="text" name="last_name" class="form-control" id="name" placeholder="Your Last Name"
+                  required />
+              </div>
+              <div class="col-md-6 form-group mt-3 mt-md-0">
+                <input type="email" class="form-control" name="email" id="email" placeholder="Your Email" required />
+              </div>
+              <div class="col-md-6 form-group mt-3 mt-md-0">
+                <input type="tel" class="form-control" name="phone_no" maxlength="11" id="email"
+                  placeholder="Your Phone number" required />
+              </div>
+            </div>
+            <div class="row mt-3 mt-md-0">
+              <div class="col-md-6 form-group">
+                <input type="text" name="address" class="form-control" id="name" placeholder="Your Adress" required />
+              </div>
+              <div class="col-md-6 form-group mt-3 mt-md-0">
+                <select name="produce" id="select_produce" class=" form-select form-control">
+                  {% for produce in farm_produces %}
+                  <option value="{{produce.id}}" id="{{produce.id}}" data-name="{{produce.unit_name}}"
+                    data-price="{{produce.price_per_unit}}">
+                    {{produce.name}}</option>
+                  {% endfor %}
+                </select>
+              </div>
+            </div>
+            <div class="input-group mt-3">
+              <input type="number" id="amount" name="unit" class="form-control" placeholder="Number of">
+              <label for="" id="unit-label" class="px-md-3 rounded-0 input-group-text">
+                {{ farm_produces.first.unit_name }}
+              </label>
+            </div>
+
+            <div class="my-3 d-block">
+              <div class="loading">Loading</div>
+              <div class="error-message" id="error-message"></div>
+              <div class="sent-message">
+                Order placed successfully.
+              </div>
+            </div>
+            <div class="d-flex align-items-center">
+              <div class="input-group">
+                <label for="" class="input-group-text rounded-0">Total: (&#8358;)</label>
+                <input type="text" class="form-control max-200" disabled value="0" id="total">
+                <button type="submit" class="rounded-0 ms-auto">Book Produce</button>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- End Booking Section -->
+
+
+</main>
+{% endblock %}
+
+{% block 'extra_js' %}
+<script src="https://js.paystack.co/v1/inline.js"></script>
+<script>
+  const total = document.getElementById('total');
+  const select_produce = document.getElementById('select_produce');
+  const amount = document.getElementById('amount')
+  const total_amount = 0
+  let refID = ''
+
+  function payWithPaystack() {
+    var handler = PaystackPop.setup({
+      key: 'pk_test_ea591b2b61ee08638efa6bc5d666413f704f9cb2', // Replace with your public key
+      email: document.getElementById('email').value,
+      amount: document.getElementById('total').value * 100, // the amount value is multiplied by 100 to convert to the lowest currency unit
+      currency: 'NGN', // Use GHS for Ghana Cedis or USD for US Dollars
+      ref: refID, // Replace with a reference you generated
+      callback: function (response) {
+        //this happens after the payment is completed successfully
+        var reference = response.reference;
+        console.log(reference)
+        //alert('Payment complete! Reference: ' + reference);
+        $.get('/farms/confirm-order/' + reference)
+          .done((data) => {
+            $('.loading').css('display', 'none')
+            $('.sent-message').addClass('alert alert-success d-block')
+          })
+          .fail((data) => {
+            $('.error-message').append("Order placing not successful.")
+            $('.error-message').addClass('d-block')
+          })
+        // Make an AJAX call to your server with the reference to verify the transaction
+      },
+      onClose: function () {
+        alert('Transaction was not completed, window closed.');
+      },
+    });
+    handler.openIframe();
+  }
+
+  $('#form').submit((e) => {
+    e.preventDefault()
+    if (total.value == 0) {
+      $('.error-message').append('Invalid submision, total should not be zero')
+      $('.error-message').addClass('d-block')
+    }
+    else {
+      $('.loading').css('display', 'block')
+      $('.loading').css('background', 'var(--color-ceal)')
+      $.post('/farms/create-order/', $('#form').serialize()).done((data) => {
+        console.log(data)
+        refID = data.id
+        payWithPaystack();
+        e.target.reset()
+      }).fail((jqXHR, textStatus, errorThrown) => {
+        //console.log()
+        err = JSON.parse(jqXHR.responseText)
+        for (let error in err) {
+          if (error === 'phone_no') {
+            $('.error-message').append(err[error])
+          }
+        }
+        console.log(err.phone_no)
+        $('.error-message').addClass('d-block')
+      })
+    }
+  })
+
+  amount.addEventListener('input', (e) => {
+    total.value = changeTotalPrice()
+  })
+
+  select_produce.addEventListener('change', (e) => {
+    total.value = changeTotalPrice()
+    document.getElementById('unit-label').innerText = document.getElementById(e.target.value).getAttribute('data-name')
+  })
+
+  function changeTotalPrice() {
+    if (amount.value == 0 || select_produce.value == 'none') {
+      return 0
+    }
+    const unit_price = document.getElementById(select_produce.value).getAttribute('data-price')
+    return amount.value * unit_price
+  }
+</script>
+{% endblock %}

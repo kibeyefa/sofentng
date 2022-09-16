@@ -1,0 +1,194 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block 'extra_css' %}
+<style>
+  .text-justify {
+    text-align: justify;
+    text-justify: inter-word;
+  }
+</style>
+{% endblock %}
+
+{% block 'main' %}
+<main id="main">
+  <div class="pt-5" style="background-color: #f6f4f4;">
+    <div class="container mt-5">
+      <div class="d-flex justify-content-between align-items-center">
+        <h3>About Us</h3>
+
+        <nav aria-label="breadcrumb">
+          <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="/">Home</a></li>
+            <li class="breadcrumb-item active" aria-current="page">About us</li>
+          </ol>
+        </nav>
+      </div>
+    </div>
+  </div>
+
+  <section id="about">
+    <div class="container-lg">
+      <div class="row">
+        <div class="col-lg-6 d-none d-lg-block">
+          <img src="/static/assets/img/about-entreprenuership.jpg" class="img-fluid" alt="">
+        </div>
+        <div class="col-lg-6 pt-4 pt-lg-0">
+          <h3>A society of entrepreneurs created solely to improve and better the lives of young entrepreneurs</h3>
+          <p class="fst-italic text-justify">
+            SOFENT is designed to build a community comprising of Prolific thinkers, Content creators, Entrepreneurs,
+            Academicians,
+            Scientists and decision makers from all spheres of life, different backgrounds and cultures. Together, we
+            build the
+            community that will shape the future of Nigeria Youths. <br> Few of our goals include:
+          </p>
+          <ul class=" list-unstyled">
+            <li><i class="ri-check-double-line"></i> Building a community committed to the service of humanity.</li>
+            <li><i class="ri-check-double-line"></i> Building a community where our future will be highly secured.</li>
+            <li><i class="ri-check-double-line"></i> Building a community where each member develops skills to become an
+              international player.
+            </li>
+          </ul>
+          <!-- <p>
+            Ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate
+            velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
+            culpa qui officia deserunt mollit anim id est laborum
+          </p> -->
+        </div>
+        <div class="col mt-5 pt-4">
+          <div class="section-title">
+            <h3>A brief history of <span>SOFENT</span></h3>
+          </div>
+          <div class="row align-items-center">
+            <div class="col-lg-6">
+              <p class="card-text lh-lg text-justify">Proffering solutions to problems which stand to hunt human and the
+                urge to
+                become
+                one
+                of the most
+                influential
+                entrepreneurial society in history where urgent and permanent solutions will be proffered to imbalances,
+                needs and
+                problems which warrant urgent attentions, spurred three optimists to lay the foundation for SOFENT in
+                2013.
+                The ideas that did not allow them to sleep, until it became what surfaced and benefited human, made
+                T.C.,
+                Ajegbomogun,
+                F.A., Maradesa, A.B., Adegoke and S.O., Adedeji to pioneer this community and laying foundation for what
+                we regarded as
+                SOFENT today.
+                SOFENT was first created at FUT, AKURE by these thinkers. It was later introduced to other students so
+                that the idea of
+                creating own market will become a reality. Today, SOFENT has been expanded to some desired level. To
+                grow
+                SOFENT to the
+                stage that she plays dominant role in entrepreneurial activities in Africa, We thrust her to the second
+                stage of
+                development. And this involves prominent thinker called S.A., Moshood and others.
+                Today, SOFENT comprises four key founders and other members of the community.
+              </p>
+            </div>
+
+            <div class="col-lg-6 d-none d-lg-block">
+              <img src="/static/assets/img/sofent-logo.jpg" class="img-fluid" alt="">
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- <section id="team" class="team">
+    <div class="container">
+      <div class="section-title">
+        <h2>Team</h2>
+        <h3>Our Hardworking <span>Team</span></h3>
+        <p>
+          Ut possimus qui ut temporibus culpa velit eveniet modi omnis est
+          adipisci expedita at voluptas atque vitae autem.
+        </p>
+      </div>
+
+      <div class="row">
+        <div class="col-lg-3 col-md-6 d-flex align-items-stretch">
+          <div class="member">
+            <div class="member-img">
+              <img src="/static/assets/img/team/team-1.jpg" class="img-fluid" alt="" />
+              <div class="social">
+                <a href=""><i class="bi bi-twitter"></i></a>
+                <a href=""><i class="bi bi-facebook"></i></a>
+                <a href=""><i class="bi bi-instagram"></i></a>
+                <a href=""><i class="bi bi-linkedin"></i></a>
+              </div>
+            </div>
+            <div class="member-info">
+              <h4>Walter White</h4>
+              <span>Chief Executive Officer</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-lg-3 col-md-6 d-flex align-items-stretch">
+          <div class="member">
+            <div class="member-img">
+              <img src="/static/assets/img/team/team-2.jpg" class="img-fluid" alt="" />
+              <div class="social">
+                <a href=""><i class="bi bi-twitter"></i></a>
+                <a href=""><i class="bi bi-facebook"></i></a>
+                <a href=""><i class="bi bi-instagram"></i></a>
+                <a href=""><i class="bi bi-linkedin"></i></a>
+              </div>
+            </div>
+            <div class="member-info">
+              <h4>Sarah Jhonson</h4>
+              <span>Product Manager</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-lg-3 col-md-6 d-flex align-items-stretch">
+          <div class="member">
+            <div class="member-img">
+              <img src="/static/assets/img/team/team-3.jpg" class="img-fluid" alt="" />
+              <div class="social">
+                <a href=""><i class="bi bi-twitter"></i></a>
+                <a href=""><i class="bi bi-facebook"></i></a>
+                <a href=""><i class="bi bi-instagram"></i></a>
+                <a href=""><i class="bi bi-linkedin"></i></a>
+              </div>
+            </div>
+            <div class="member-info">
+              <h4>William Anderson</h4>
+              <span>CTO</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-lg-3 col-md-6 d-flex align-items-stretch">
+          <div class="member">
+            <div class="member-img">
+              <img src="/static/assets/img/team/team-4.jpg" class="img-fluid" alt="" />
+              <div class="social">
+                <a href=""><i class="bi bi-twitter"></i></a>
+                <a href=""><i class="bi bi-facebook"></i></a>
+                <a href=""><i class="bi bi-instagram"></i></a>
+                <a href=""><i class="bi bi-linkedin"></i></a>
+              </div>
+            </div>
+            <div class="member-info">
+              <h4>Amanda Jepson</h4>
+              <span>Accountant</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section> -->
+</main>
+{% endblock %}
+
+{% block 'extra_js' %}
+<script>
+  document.getElementById('header').style.background = 'rgba(0,0,0, 0.9)'
+</script>
+{% endblock %}
